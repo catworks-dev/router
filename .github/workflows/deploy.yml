@@ -13,8 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Stop running container
-        run: docker stop catworks-router
-
       - name: Run via compose
-        run: docker compose up -d
+        run: docker compose up -d --force-recreate --remove-orphans
