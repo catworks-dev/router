@@ -7,12 +7,12 @@ services:
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
     ports:
-      - "80:80"
+      - "443:443"
     networks:
       - catworks-routed
     environment:
       - NGINX_HOST=catworks.dev
-      - NGINX_PORT=80
+      - NGINX_PORT=443
 
 networks:
   catworks-routed:
