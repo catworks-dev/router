@@ -6,6 +6,7 @@ services:
     container_name: catworks-router
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
+      - /usr/src/app:/usr/src/app:ro
     ports:
       - "443:443"
     networks:
