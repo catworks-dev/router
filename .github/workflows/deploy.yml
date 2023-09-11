@@ -1,0 +1,20 @@
+name: Deploy
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: vm-1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Stop running container
+        run: docker stop catworks-router
+
+      - name: Run via compose
+        run: docker compose up -d
