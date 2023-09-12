@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: vm-1
-    environment: main
 
     steps:
       - uses: actions/checkout@v3
