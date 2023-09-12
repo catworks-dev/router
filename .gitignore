@@ -1,2 +1,5 @@
 # IDE related
 /.idea/
+
+# Secrets
+*.env

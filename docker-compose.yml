@@ -21,11 +21,8 @@ services:
     container_name: catworks-mongo
     restart: on-failure
     command: mongod --auth
-    environment:
-        MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT}
-        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PWD}
-        MONGO_ADMIN: ${MONGO_ADMIN}
-        MONGO_ADMIN_PWD: ${MONGO_ADMIN_PWD}
+    env_file:
+      - ./mongo.env
     networks:
       - catworks-routed
     ports:

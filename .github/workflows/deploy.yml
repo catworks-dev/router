@@ -15,11 +15,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Copy env
+        run: |
+          rm -f ./mongo.env
+          cp ~/mongo.env ./mongo.env
+
       - name: Run via compose
-        env:
-          MONGO_ROOT: ${{ secrets.MONGO_ROOT }}
-          MONGO_ROOT_PWD: ${{ secrets.MONGO_ROOT_PWD }}
-          MONGO_ADMIN: ${{ secrets.MONGO_ADMIN }}
-          MONGO_ADMIN_PWD: ${{ secrets.MONGO_ADMIN_PWD }}
         run: docker compose up -d --force-recreate --remove-orphans
 
