@@ -16,6 +16,29 @@ services:
       - NGINX_HOST=catworks.dev
       - NGINX_PORT=443
 
+  catworks-mongo:
+    image: mongo:lastest
+    container_name: catworks-mongo
+    restart: on-failure
+    command: mongod --auth
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PWD}
+        MONGO_ADMIN: ${MONGO_ADMIN}
+        MONGO_ADMIN_PWD: ${MONGO_ADMIN_PWD}
+    networks:
+      - catworks-routed
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - catworks-mongo-data:/data/db
+      - catworks-mongo-log:/var/log/mongodb
+
+volumes:
+  catworks-mongo-data:
+  catworks-mongo-log:
+
 networks:
   catworks-routed:
     external: true
