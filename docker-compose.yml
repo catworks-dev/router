@@ -7,6 +7,7 @@ services:
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
       - /usr/src/app:/usr/src/app:ro
+      - ./site/src:/www:ro
     ports:
       - "443:443"
     networks:
