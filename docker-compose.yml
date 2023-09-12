@@ -20,7 +20,7 @@ services:
     image: mongo:latest
     container_name: catworks-mongo
     restart: on-failure
-    command: mongod --auth
+    entrypoint: ["/usr/bin/mongod", "--config", "/data/config/ssl.conf"]
     env_file:
       - ./mongo.env
     networks:
@@ -28,9 +28,11 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
       - catworks-mongo-data:/data/db
       - catworks-mongo-log:/var/log/mongodb
+      - /usr/src/app:/data/ssl
+      - ./mongo/ssl.conf:/data/config/ssl.conf
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
 volumes:
   catworks-mongo-data:
